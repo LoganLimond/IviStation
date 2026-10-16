@@ -189,6 +189,8 @@ GLOBAL_LIST_EMPTY(objectives)
 
 	var/mob/living/mob_occupant = occupant
 	// Update any existing objectives involving this mob.
+	if(mob_occupant.mind)
+		SEND_SIGNAL(mob_occupant.mind, COMSIG_MIND_ENTERED_CRYO)
 	for(var/datum/objective/objective as anything in GLOB.objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
@@ -291,6 +293,12 @@ GLOBAL_LIST_EMPTY(objectives)
 				message_app.invisible = TRUE
 
 		control_computer.store_item(mob_occupant, item_to_store)
+
+	if(control_computer)
+		var/obj/item/disk/nuclear/disk = locate(/obj/item/disk/nuclear) in control_computer.get_all_contents()
+		if(disk)
+			var/list/possible_turfs = get_adjacent_open_turfs(control_computer)
+			disk.forceMove(length(possible_turfs) ? pick(possible_turfs) : drop_location())
 
 /// Handles putting mob inside the cryopod by user
 /obj/machinery/cryopod/proc/put_mob_inside(mob/target, mob/user)

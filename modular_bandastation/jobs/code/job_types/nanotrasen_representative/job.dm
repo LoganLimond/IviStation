@@ -4,7 +4,7 @@
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
 	faction = FACTION_STATION
 	total_positions = 1
-	spawn_positions = 0
+	spawn_positions = 1
 	supervisors = "Центральное Командование"
 	minimal_player_age = 14
 	exp_requirements = 1500
@@ -12,6 +12,7 @@
 	exp_required_type_department = EXP_TYPE_COMMAND
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "NANOTRASEN_REPRESENTATIVE"
+	tgui_icon = FA_ICON_PAPERCLIP
 
 	outfit = /datum/outfit/job/nanotrasen_representative
 

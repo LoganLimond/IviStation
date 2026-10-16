@@ -18,7 +18,7 @@
 /datum/martial_art/judo/activate_style(mob/living/new_holder)
 	. = ..()
 	RegisterSignal(holder, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(check_baton))
-	for(var/obj/item/item in new_holder.held_items)
+	for(var/obj/item/item in new_holder.get_held_items())
 		check_baton(equipped_item = item, slot = ITEM_SLOT_HANDS)
 
 	to_chat(new_holder, span_userdanger("Наниты, содержащиеся в поясе, наделяют вас мастерством обладателя черного пояса по корпоративному дзюдо!"))
@@ -69,7 +69,7 @@
 	if(check_streak(attacker, defender))
 		return MARTIAL_ATTACK_SUCCESS
 	if(attacker == defender)//there is no disarming yourself, so we need to let user know
-		to_chat(attacker, span_notice("Вы добавили толчек в комбо."))
+		to_chat(attacker, span_notice("Вы добавили толчок в комбо."))
 		return MARTIAL_ATTACK_FAIL
 
 	return MARTIAL_ATTACK_INVALID
@@ -233,6 +233,6 @@
 	else
 		owner.visible_message(
 			span_danger("[owner.declent_ru(NOMINATIVE)] встает в сбивающую стойку!"),
-			span_bolditalic("Ваше следующеё приём это 'сбить с толку'.")
+			span_bolditalic("Ваш следующий приём - «сбить с толку».")
 		)
 		source.streak = DISCOMBOBULATE_COMBO

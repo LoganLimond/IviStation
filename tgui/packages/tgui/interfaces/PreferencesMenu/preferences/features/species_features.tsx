@@ -1,8 +1,10 @@
 import {
+  CheckboxInput,
   type Feature,
   type FeatureChoiced,
   type FeatureChoicedServerData,
   FeatureColorInput,
+  type FeatureToggle,
   type FeatureValueProps,
 } from './base';
 import { FeatureDropdownInput } from './dropdowns';
@@ -257,4 +259,42 @@ export const tajaran_tail_markings_color: Feature<string> = {
 export const skrell_head_tentacle_color: Feature<string> = {
   name: 'Щупальца на голове: цвет',
   component: FeatureColorInput,
+};
+
+export const feature_skrell_head_tentacle_ornament: FeatureChoiced = {
+  name: 'Украшение для щупалец',
+  component: (
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
+  ) => {
+    return <FeatureDropdownInput buttons {...props} />;
+  },
+};
+
+export const feature_skrell_cloth_wrap_toggle: FeatureChoiced = {
+  name: 'Ткань для щупалец',
+  component: (
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
+  ) => {
+    return <FeatureDropdownInput buttons {...props} />;
+  },
+};
+
+export const skrell_cloth_wrap_color: Feature<string> = {
+  name: 'Ткань для щупалец: цвет',
+  component: FeatureColorInput,
+};
+
+export const feature_fish_tail_color: Feature<string> = {
+  name: 'Fish tail color',
+  component: FeatureColorInput,
+};
+
+export const feature_cerulean_frills: FeatureToggle = {
+  name: 'Fish frills',
+  component: CheckboxInput,
+};
+
+export const feature_cerulean_snout: FeatureToggle = {
+  name: 'Fish snout',
+  component: CheckboxInput,
 };

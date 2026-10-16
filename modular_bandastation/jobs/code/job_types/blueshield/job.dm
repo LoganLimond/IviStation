@@ -4,7 +4,7 @@
 	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
 	faction = FACTION_STATION
 	total_positions = 1
-	spawn_positions = 0
+	spawn_positions = 1
 	supervisors = "Представитель Нанотрейзен и Центральное Командование"
 	minimal_player_age = 7
 	exp_requirements = 1800
@@ -12,6 +12,7 @@
 	exp_required_type_department = EXP_TYPE_SECURITY
 	exp_granted_type = EXP_TYPE_COMMAND
 	config_tag = "BLUESHIELD"
+	tgui_icon = FA_ICON_SHIELD
 
 	outfit = /datum/outfit/job/blueshield
 	plasmaman_outfit = /datum/outfit/plasmaman/blueshield

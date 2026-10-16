@@ -88,14 +88,14 @@
 // Heretic path defines.
 #define PATH_START "Стартовый путь"
 #define PATH_SIDE "Вторичный путь"
-#define PATH_ASH "Путь пепла"
-#define PATH_RUST "Путь ржавчины"
-#define PATH_FLESH "Путь плоти"
-#define PATH_VOID "Путь пустоты"
-#define PATH_BLADE "Путь клинка"
-#define PATH_COSMIC "Путь космоса"
-#define PATH_LOCK "Путь замка"
-#define PATH_MOON "Путь луны"
+#define PATH_ASH "Путь Пепла"
+#define PATH_RUST "Путь Ржавчины"
+#define PATH_FLESH "Путь Плоти"
+#define PATH_VOID "Путь Пустоты"
+#define PATH_BLADE "Путь Клинка"
+#define PATH_COSMIC "Путь Космоса"
+#define PATH_LOCK "Путь Замка"
+#define PATH_MOON "Путь Луны"
 
 //Heretic knowledge tree defines
 #define HKT_NEXT "next"
@@ -155,7 +155,7 @@
 /// - Must be a human (type, not species)
 /// - Skeletons cannot be husked (they are snowflaked instead of having a trait)
 /// - Monkeys are monkeys, not quite human (balance reasons)
-#define IS_VALID_GHOUL_MOB(mob) (ishuman(mob) && !isskeleton(mob) && !ismonkey(mob))
+#define IS_VALID_GHOUL_MOB(mob) (ishuman(mob) && !isskeleton(mob) && !HAS_TRAIT(mob, TRAIT_LESSER_HUMANOID))
 
 /// Forces the blob to place the core where they currently are, ignoring any checks.
 #define BLOB_FORCE_PLACEMENT -1
@@ -282,7 +282,7 @@ GLOBAL_LIST_INIT(ai_employers, list(
 #define GET_CULTIST(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/cult))
 
 /// Checks if the mob is a sentient or non-sentient cultist
-#define IS_CULTIST_OR_CULTIST_MOB(mob) ((IS_CULTIST(mob)) || (mob.faction.Find(FACTION_CULT)))
+#define IS_CULTIST_OR_CULTIST_MOB(mob) ((IS_CULTIST(mob)) || (mob.has_faction(FACTION_CULT)))
 
 /**
  * Heretic checks
@@ -330,6 +330,9 @@ GLOBAL_LIST_INIT(ai_employers, list(
 /// Checks if the given mob is a spy!
 #define IS_SPY(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/spy))
 
+/// Checks if the given mob is a bloodworm
+#define IS_BLOODWORM(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/blood_worm))
+
 /// List of human antagonist types which don't spawn directly on the space station
 GLOBAL_LIST_INIT(human_invader_antagonists, list(
 	/datum/antagonist/abductor,
@@ -355,7 +358,7 @@ GLOBAL_LIST_INIT(human_invader_antagonists, list(
 /// Only appears for spy bounties
 #define OBJECTIVE_ITEM_TYPE_SPY "spy"
 
-// Progression traitor defines
+// Traitor objective defines
 
 /// Chance that the traitor could roll hijack if the pop limit is met.
 #define HIJACK_PROB 10
@@ -421,6 +424,7 @@ GLOBAL_LIST_INIT(human_invader_antagonists, list(
 #define ANTAG_GROUP_ARACHNIDS "Arachnid Infestation"
 #define ANTAG_GROUP_ASHWALKERS "Ash Walkers"
 #define ANTAG_GROUP_BIOHAZARDS "Biohazards"
+#define ANTAG_GROUP_BLOODY "Bloody Monstrosities"
 #define ANTAG_GROUP_CLOWNOPS "Clown Operatives"
 #define ANTAG_GROUP_ERT "Emergency Response Team"
 #define ANTAG_GROUP_GLITCH "Digital Anomalies"

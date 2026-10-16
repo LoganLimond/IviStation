@@ -29,11 +29,11 @@
 
 	var/mob/living/target_mob = target
 	if(!target_mob.has_limbs)
-		context[SCREENTIP_CONTEXT_LMB] = HAS_TRAIT(source, TRAIT_READY_TO_OPERATE) ? "Убрать [declent_ru(aid_name, ACCUSATIVE)]" : "Подготовить к операции"
+		context[SCREENTIP_CONTEXT_LMB] = HAS_TRAIT(source, TRAIT_READY_TO_OPERATE) ? "Убрать [aid_name]" : "Подготовить к операции"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	var/obj/item/bodypart/precise_part = target_mob.get_bodypart(deprecise_zone(user.zone_selected)) || target_mob.get_bodypart(BODY_ZONE_CHEST)
-	context[SCREENTIP_CONTEXT_LMB] = HAS_TRAIT(precise_part, TRAIT_READY_TO_OPERATE) ? "Убрать [declent_ru(aid_name, ACCUSATIVE)]" : "Подготовить [precise_part.ru_plaintext_zone[NOMINATIVE]] к операции"
+	context[SCREENTIP_CONTEXT_LMB] = HAS_TRAIT(precise_part, TRAIT_READY_TO_OPERATE) ? "Убрать [aid_name]" : "Подготовить [precise_part.ru_plaintext_zone[NOMINATIVE]] к операции"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /datum/element/surgery_aid/proc/on_item_interaction(datum/source, mob/living/user, atom/target, ...)
@@ -93,7 +93,7 @@
 	REMOVE_TRAIT(owner, TRAIT_READY_TO_OPERATE, TRAIT_STATUS_EFFECT(id))
 	UnregisterSignal(owner, list(COMSIG_MOVABLE_MOVED, COMSIG_CARBON_POST_ATTACH_LIMB, COMSIG_CARBON_POST_REMOVE_LIMB))
 
-/datum/status_effect/surgery_prepped/get_examine_text()
+/datum/status_effect/surgery_prepped/get_examine_text(mob/examiner)
 	var/list/zones_readable = list()
 	// give the body zones a consistent order, the same order as GLOB.all_body_zones
 	for(var/zone in GLOB.all_body_zones & zones)
@@ -114,7 +114,7 @@
 	if(movement_counter < 4)
 		return
 	// "The surgical drapes and bedsheets adorning John fall off!"
-	owner.visible_message(span_warning("[capitalize(declent_ru(surgical_aids, NOMINATIVE))] спадают с [owner]!"))
+	owner.visible_message(span_warning("Простынь спадает с [owner.declent_ru(GENITIVE)]!"))
 	qdel(src)
 
 /datum/status_effect/surgery_prepped/proc/on_attach_limb(datum/source, obj/item/bodypart/limb)
